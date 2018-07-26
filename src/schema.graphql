@@ -1,0 +1,100 @@
+type Comment implements Node {
+  # The ID of an object
+  id: ID!
+  story: Story!
+  parent: Comment
+  author: User!
+  comments: [Comment]
+  text: String
+  pointsCount: Int!
+  createdAt: String!
+  updatedAt: String!
+}
+
+input CreateStoryInput {
+  title: String
+  text: String
+  clientMutationId: String
+}
+
+type CreateStoryPayload {
+  story: Story
+  clientMutationId: String
+}
+
+type Mutation {
+  # Authenticate user by using JWT token.
+  signIn(input: SignInInput!): SignInPayload
+
+  # Clear authentication cookie.
+  signOut(input: SignOutInput!): SignOutPayload
+
+  # Create a new story.
+  createStory(input: CreateStoryInput!): CreateStoryPayload
+  updateStory(input: UpdateStoryInput!): UpdateStoryPayload
+}
+
+# An object with an ID
+interface Node {
+  # The id of the object.
+  id: ID!
+}
+
+type Query {
+  me: User
+  story(slug: String!): Story
+  stories: [Story]
+}
+
+input SignInInput {
+  token: String!
+  clientMutationId: String
+}
+
+type SignInPayload {
+  me: User
+  clientMutationId: String
+}
+
+input SignOutInput {
+  clientMutationId: String
+}
+
+type SignOutPayload {
+  clientMutationId: String
+}
+
+type Story implements Node {
+  # The ID of an object
+  id: ID!
+  author: User!
+  slug: String!
+  title: String!
+  text: String!
+  isURL: Boolean!
+  comments: [Comment]
+  pointsCount: Int!
+  commentsCount: Int!
+  createdAt: String!
+  updatedAt: String!
+}
+
+input UpdateStoryInput {
+  id: ID!
+  title: String
+  text: String
+  clientMutationId: String
+}
+
+type UpdateStoryPayload {
+  story: Story
+  clientMutationId: String
+}
+
+type User implements Node {
+  # The ID of an object
+  id: ID!
+  displayName: String
+  photoURL: String
+  email: String
+}

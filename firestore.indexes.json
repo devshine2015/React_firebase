@@ -1,0 +1,18 @@
+{
+  "indexes": [
+    {
+      "collectionId": "stories",
+      "fields": [
+        { "fieldPath": "approved", "mode": "ASCENDING" },
+        { "fieldPath": "authorId", "mode": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionId": "stories",
+      "fields": [
+        { "fieldPath": "approved", "mode": "DESCENDING" },
+        { "fieldPath": "createdAt", "mode": "DESCENDING" }
+      ]
+    }
+  ]
+}
